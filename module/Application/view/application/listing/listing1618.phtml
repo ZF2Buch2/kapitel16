@@ -1,0 +1,82 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.18 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.18');
+$this->pageTitle('Listing 16.18');
+?>
+<h3><code>BlogForm</code> zur Eingabe der Blogbeiträge</h3>
+<pre>
+&lt;?php
+namespace Blog\Form;
+
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
+use Zend\Form\Element\Submit;
+use Zend\Form\Form;
+
+class BlogForm extends Form implements BlogFormInterface
+{
+    public function addCsrfElement($name = 'tick')
+    {
+        $element = new Csrf($name);
+        $this->add($element);
+    }
+        
+    public function addIdElement($name = 'id')
+    {
+        $element = new Hidden($name);
+        $this->add($element);
+    }
+        
+    public function addTitleElement($name = 'title')
+    {
+        $element = new Text($name);
+        $element->setLabel('Überschrift');
+        $element->setAttribute('class', 'span5');
+        $this->add($element);
+    }
+    
+    public function addTeaserElement($name = 'teaser')
+    {
+        $element = new Textarea($name);
+        $element->setLabel('Anreißer');
+        $element->setAttribute('class', 'ckeditor');
+        $this->add($element);
+    }
+    
+    public function addContentElement($name = 'content')
+    {
+        $element = new Textarea($name);
+        $element->setLabel('Beitragstext');
+        $element->setAttribute('class', 'ckeditor');
+        $this->add($element);
+    }
+    
+    public function addSubmitElement($name = 'save', $label = 'Speichern')
+    {
+        $element = new Submit($name);
+        $element->setValue($label);
+        $element->setAttribute('class', 'btn');
+        $this->add($element);
+    }
+}
+</pre>

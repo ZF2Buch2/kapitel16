@@ -1,0 +1,48 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.29 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.29');
+$this->pageTitle('Listing 16.29');
+?>
+<h3>Darstellung der Blogliste durch View-Skript <code>index.phtml</code></h3>
+<pre>
+&lt;?php
+$this-&gt;headTitle('Luigis Pizza-Blog');
+$this-&gt;pageTitle('Luigis Pizza-Blog');
+?&gt;
+&lt;?php foreach ($this-&gt;blogList as $blog) : ?&gt;
+&lt;?php
+$urlShow = $this-&gt;url('blog/action', array('url' =&gt; $blog-&gt;getUrl()));
+?&gt;
+&lt;h3&gt;&lt;?php echo $blog-&gt;getTitle(); ?&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Datum: &lt;?php echo $this-&gt;date($blog-&gt;getCdate()); ?&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div class="clearfix"&gt;
+&lt;?php echo $blog-&gt;getTeaser(); ?&gt;
+&lt;p&gt;&lt;a href="&lt;?php echo $urlShow; ?&gt;" class="btn"&gt;Weiter lesen&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+&lt;?php endforeach; ?&gt;
+&lt;?php
+echo $this-&gt;paginationControl(
+    $this-&gt;blogList, 'Sliding', 'pagination/sliding', 
+    array('route' =&gt; 'blog/page')
+);
+?&gt;
+</pre>

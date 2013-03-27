@@ -1,0 +1,35 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.30 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.30');
+$this->pageTitle('Listing 16.30');
+?>
+<h3>Darstellung eines Blogbeitrags durch View-Skript <code>show.phtml</code></h3>
+<pre>
+&lt;?php
+$blog = $this->blogData;
+
+$this->headTitle($blog->getTitle());
+$this->pageTitle($blog->getTitle());
+?&gt;
+&lt;p&gt;&lt;em&gt;Datum: &lt;?php echo $this-&gt;date($blog-&gt;getCdate()); ?&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;?php echo $blog-&gt;getContent(); ?&gt;
+&lt;p&gt;&lt;a href="&lt;?php echo $this-&gt;url('blog'); ?&gt;" class="btn"&gt;Zurück&lt;/a&gt;&lt;/p&gt;
+</pre>

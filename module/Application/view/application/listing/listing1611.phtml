@@ -1,0 +1,124 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.11 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.11');
+$this->pageTitle('Listing 16.11');
+?>
+<h3><code>BlogEntity</code> für Objektzugriff auf Blogbeiträge</h3>
+<pre>
+&lt;?php
+namespace Blog\Entity;
+
+class BlogEntity implements BlogEntityInterface
+{
+    protected $id;
+    protected $cdate;
+    protected $title;
+    protected $teaser;
+    protected $content;
+    protected $url;
+    
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    public function setCdate($cdate)
+    {
+        $this->cdate = $cdate;
+    }
+    
+    public function getCdate()
+    {
+        return $this->cdate;
+    }
+    
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+    
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    
+    public function setTeaser($teaser)
+    {
+        $this->teaser = $teaser;
+    }
+    
+    public function getTeaser()
+    {
+        return $this->teaser;
+    }
+    
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+    
+    public function getContent()
+    {
+        return $this->content;
+    }
+    
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+    
+    public function getUrl()
+    {
+        return $this->url;
+    }
+    
+    public function exchangeArray(array $array)
+    {
+        foreach ($array as $key => $value) {
+            if (empty($value)) {
+                continue;
+            }
+            $method = 'set' . ucfirst($key);
+            if (!method_exists($this, $method)) {
+                continue;
+            }
+            $this->$method($value);
+        }
+    }
+
+    public function getArrayCopy()
+    {
+        return array(
+            'id'      => $this->getId(),
+            'cdate'   => $this->getCdate(),
+            'title'   => $this->getTitle(),
+            'teaser'  => $this->getTeaser(),
+            'content' => $this->getContent(),
+            'url'     => $this->getUrl(),
+        );
+    }
+}
+</pre>

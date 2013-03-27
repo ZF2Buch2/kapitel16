@@ -1,0 +1,83 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.25 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.25');
+$this->pageTitle('Listing 16.25');
+?>
+<h3><code>BlogService</code>, Teil 2</h3>
+<pre>
+&lt;?php
+namespace Blog\Service;
+
+[...]
+
+class BlogService implements 
+    EventManagerAwareInterface, 
+    BlogServiceInterface
+{
+    [...] 
+    
+    public function getForm($type = 'create')
+    {
+        if (!isset($this->forms[$type])) {
+            $this->getEventManager()->trigger(
+                'set-blog-form', __CLASS__, array('type' => $type)
+            );
+        }
+        
+        return $this->forms[$type];
+    }
+
+    public function setForm(BlogFormInterface $form, $type = 'create')
+    {
+        $this->forms[$type] = $form;
+    }
+
+    public function fetchSingleByUrl($url)
+    {
+        return $this->getTable()->fetchSingleByUrl($url);
+    }
+    
+    public function fetchSingleById($id)
+    {
+        return $this->getTable()->fetchSingleById($id);
+    }
+    
+    public function fetchList($page = 1, $perPage = 15)
+    {
+        $select = $this->getTable()->getSql()->select();
+        $select->order('cdate desc');
+        
+        $adapter = new DbSelect(
+            $select, 
+            $this->getTable()->getAdapter(), 
+            $this->getTable()->getResultSetPrototype()
+        );
+        $paginator = new Paginator($adapter);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage($perPage);
+        $paginator->setPageRange(9);
+        
+        return $paginator;
+    }
+    
+    [...]
+}
+</pre>

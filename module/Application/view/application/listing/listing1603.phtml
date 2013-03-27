@@ -1,0 +1,113 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.3 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.3');
+$this->pageTitle('Listing 16.3');
+?>
+<h3>Routing in <code>module.config.php</code> für <code>Blog</code> Modul</h3>
+<pre>
+&lt;?php
+return array(
+    'router' => array(
+        'routes' => array(
+            'blog' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/blog',
+                    'constraints' => array(
+                    ),
+                    'defaults' => array(
+                        'controller' => 'blog',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'action' => array(
+                        'type'    => 'segment',
+                        'options' => array(
+                            'route'    => '/:url',
+                            'constraints' => array(
+                                'url' => '[a-zA-Z][a-zA-Z0-9-]*',
+                            ),
+                            'defaults' => array(
+                                'action'     => 'show',
+                            ),
+                        ),
+                    ),
+                    'page' => array(
+                        'type'    => 'segment',
+                        'options' => array(
+                            'route'    => '/:page',
+                            'constraints' => array(
+                                'page'   => '[0-9]+',
+                            ),
+                        ),
+                    ),
+                    'rss' => array(
+                        'type'    => 'literal',
+                        'options' => array(
+                            'route'    => '/rss',
+                            'defaults' => array(
+                                'action'     => 'rss',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'blog-admin' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/blog-admin',
+                    'defaults' => array(
+                        'controller' => 'blog-admin',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'action' => array(
+                        'type'    => 'segment',
+                        'options' => array(
+                            'route'    => '/:action[/:id]',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9]+',
+                            ),
+                        ),
+                    ),
+                    'page' => array(
+                        'type'    => 'segment',
+                        'options' => array(
+                            'route'    => '/:page[/:sort]',
+                            'constraints' => array(
+                                'page'   => '[0-9]+',
+                                'sort'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),
+    
+    [...]
+);
+</pre>

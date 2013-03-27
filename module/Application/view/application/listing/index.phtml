@@ -1,0 +1,173 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Index view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listings - Kapitel 16');
+$this->pageTitle('Listings - Kapitel 16');
+?>
+<table class="table table-bordered table-striped table-hover table-condensed">
+<thead>
+<tr>
+<th>Listing</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/listing/listing1601">Listing 16.1</a></td>
+<td>Verzeichnisstruktur für <code>Blog</code> Modul</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1602">Listing 16.2</a></td>
+<td><code>Module.php</code> für <code>Blog</code> Modul</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1603">Listing 16.3</a></td>
+<td>Routing in <code>module.config.php</code> für <code>Blog</code> Modul</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1604">Listing 16.4</a></td>
+<td>Weitere Konfiguration <code>module.config.php</code> für <code>Blog</code> Modul</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1605">Listing 16.5</a></td>
+<td><code>BlogController</code> für <code>Blog</code> Modul</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1606">Listing 16.6</a></td>
+<td>View-Skript <code>index.phtml</code> für <code>Blog</code> Modul</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1607">Listing 16.7</a></td>
+<td>Aufbau der Datenbanktabelle</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1608">Listing 16.8</a></td>
+<td>Datenbankkonfiguration in <code>/config/autoload/global.php</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1609">Listing 16.9</a></td>
+<td>Datenbankkonfiguration in <code>/config/autoload/local.php</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1610">Listing 16.10</a></td>
+<td><code>BlogEntityInterface</code> für Blogbeiträge</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1611">Listing 16.11</a></td>
+<td><code>BlogEntity</code> für Objektzugriff auf Blogbeiträge</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1612">Listing 16.12</a></td>
+<td><code>BlogTableInterface</code> für Tabelle <code>blogs</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1613">Listing 16.13</a></td>
+<td><code>BlogTable</code> Klasse erweitert <code>BlogTableInterface</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1614">Listing 16.14</a></td>
+<td><code>BlogTableFactory</code> erstellt Instanz von <code>BlogTable</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1615">Listing 16.15</a></td>
+<td>Modifizierte <code>module.config.php</code> mit Service-Manager Konfiguration</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1616">Listing 16.16</a></td>
+<td><code>BlogFilter</code> zum Filtern der Blogbeiträge</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1617">Listing 16.17</a></td>
+<td><code>BlogFormInterface</code> für Blog Formulare</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1618">Listing 16.18</a></td>
+<td><code>BlogForm</code> zur Eingabe der Blogbeiträge</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1619">Listing 16.19</a></td>
+<td><code>CreateFormFactory</code> erstellt Instanz von Erstellungsformular</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1620">Listing 16.20</a></td>
+<td>Weitere Factories für die Initialisierung von Formularen</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1621">Listing 16.21</a></td>
+<td>Geänderte <code>module.config.php</code> mit Formular-Factories</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1622">Listing 16.22</a></td>
+<td>Geänderte <code>Module.php</code> für Injizierung der <code>BlogForm</code>-Objekte</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1623">Listing 16.23</a></td>
+<td><code>BlogServiceInterface</code> für <code>BlogService</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1624">Listing 16.24</a></td>
+<td><code>BlogService</code>, Teil 1</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1625">Listing 16.25</a></td>
+<td><code>BlogService</code>, Teil 2</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1626">Listing 16.26</a></td>
+<td><code>BlogService</code>, Teil 3</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1627">Listing 16.27</a></td>
+<td><code>BlogController</code> für öffentlichen Bereich</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1628">Listing 16.28</a></td>
+<td>Konfiguration der View-Strategy im View-Manager</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1629">Listing 16.29</a></td>
+<td>Darstellung der Blogliste durch View-Skript <code>index.phtml</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1630">Listing 16.30</a></td>
+<td>Darstellung eines Blogbeitrags durch View-Skript <code>show.phtml</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1631">Listing 16.31</a></td>
+<td><code>AdminController</code> für Administrationsbereich</td>
+</tr>
+<tr>
+<td><a href="/listing/listing1632">Listing 16.32</a></td>
+<td>Darstellung der Übersicht durch View-Skript <code>index.phtml</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1633">Listing 16.33</a></td>
+<td>Anlegen eines neuen Blogbeitrags mit <code>create.phtml</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1634">Listing 16.34</a></td>
+<td>Bearbeiten eines Blogbeitrags mit <code>update.phtml</code></td>
+</tr>
+<tr>
+<td><a href="/listing/listing1635">Listing 16.35</a></td>
+<td>Löschen eines Blogbeitrags mit <code>delete.phtml</code></td>
+</tr>
+</tbody>
+</table>

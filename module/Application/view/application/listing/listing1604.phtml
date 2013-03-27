@@ -1,0 +1,93 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch 'Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung'
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.4 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.4');
+$this->pageTitle('Listing 16.4');
+?>
+<h3>Weitere Konfiguration <code>module.config.php</code> für <code>Blog</code> Modul</h3>
+<pre>
+&lt;?php
+return array(
+    [...]
+    
+    'controllers' => array(
+        'invokables' => array(
+            'blog'       => 'Blog\Controller\BlogController',
+            'blog-admin' => 'Blog\Controller\AdminController',
+        ),
+    ),
+    
+    'view_manager' => array(
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
+        ),
+    ),
+    
+    'navigation' => array(
+        'default' => array(
+            'blog' => array(
+                'type'       => 'mvc',
+                'order'      => '500',
+                'label'      => 'Blog',
+                'route'      => 'blog',
+                'controller' => 'blog',
+                'action'     => 'index',
+                'pages'      => array(
+                    'show' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Anzeigen',
+                        'route'      => 'blog',
+                        'controller' => 'blog',
+                        'action'     => 'show',
+                    ),
+                    'blog-admin' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Blogverwaltung',
+                        'route'      => 'blog-admin',
+                        'controller' => 'blog-admin',
+                        'action'     => 'index',
+                    ),
+                    'create' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Anlegen',
+                        'route'      => 'blog-admin',
+                        'controller' => 'blog-admin',
+                        'action'     => 'create',
+                    ),
+                    'update' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Bearbeiten',
+                        'route'      => 'blog-admin',
+                        'controller' => 'blog-admin',
+                        'action'     => 'update',
+                    ),
+                    'delete' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Löschen',
+                        'route'      => 'blog-admin',
+                        'controller' => 'blog-admin',
+                        'action'     => 'delete',
+                    ),
+                ),
+            ),
+        ),
+    ),
+);
+</pre>

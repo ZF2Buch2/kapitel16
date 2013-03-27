@@ -1,0 +1,99 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.26 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.26');
+$this->pageTitle('Listing 16.26');
+?>
+<h3><code>BlogService</code>, Teil 3</h3>
+<pre>
+&lt;?php
+namespace Blog\Service;
+
+[...]
+
+class BlogService implements 
+    EventManagerAwareInterface, 
+    BlogServiceInterface
+{
+    [...]
+    
+    public function save(array $data, $id = null)
+    {
+        $mode = is_null($id) ? 'create' : 'update';
+        
+        if ($mode == 'create') {
+            $blog = new BlogEntity();
+        } else {
+            $blog = $this->fetchSingleById($id);
+        }
+        
+        $form = $this->getForm($mode);
+        $form->setData($data);
+        
+        if (!$form->isValid()) {
+            $this->setMessage('Bitte Eingaben überprüfen!');
+            return false;
+        }
+        
+        $blog->exchangeArray($form->getData());
+        
+        if ($mode == 'create') {
+            $blog->setCdate(date('Y-m-d H:i:s'));
+        }
+        $blog->setUrl(StaticFilter::execute($blog->getTitle(), 'StringToUrl'));
+        
+        $saveData = $blog->getArrayCopy();
+        
+        try {
+            if ($mode == 'create') {
+                $this->getTable()->insert($saveData);
+                
+                $id = $this->getTable()->getLastInsertValue();
+            } else {
+                $this->getTable()->update($saveData, array('id' => $id));
+            }
+        } catch (InvalidQueryException $e) {
+            $this->setMessage('Blogbeitrag wurde nicht gespeichert!');
+            return false;
+        }
+
+        $blog = $this->fetchSingleById($id);
+        
+        $this->setMessage('Blogbeitrag wurde gespeichert!');
+        
+        return $blog;
+    }
+        
+    public function delete($id)
+    {
+        $blog = $this->fetchSingleById($id);
+        
+        try {
+            $result = $this->getTable()->delete(array('id' => $id));
+        } catch (InvalidQueryException $e) {
+            return false;
+        }
+
+        $this->setMessage('Der Blogbeitrag wurde gelöscht!');
+        
+        return true;
+    }
+}
+</pre>

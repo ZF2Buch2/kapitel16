@@ -1,0 +1,40 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.17 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.17');
+$this->pageTitle('Listing 16.17');
+?>
+<h3><code>BlogFormInterface</code> für Blog Formulare</h3>
+<pre>
+&lt;?php
+namespace Blog\Form;
+
+use Zend\Form\FormInterface;
+
+interface BlogFormInterface extends FormInterface
+{
+    public function addCsrfElement($name = 'tick');
+    public function addIdElement($name = 'id');
+    public function addTitleElement($name = 'title');
+    public function addTeaserElement($name = 'teaser');
+    public function addContentElement($name = 'content');
+    public function addSubmitElement($name = 'save', $label = 'Speichern');
+}
+</pre>

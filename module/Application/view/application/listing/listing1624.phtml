@@ -1,0 +1,93 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.24 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.24');
+$this->pageTitle('Listing 16.24');
+?>
+<h3><code>BlogService</code>, Teil 1</h3>
+<pre>
+&lt;?php
+namespace Blog\Service;
+
+use Zend\Db\Adapter\Exception\InvalidQueryException;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\Filter\StaticFilter;
+use Zend\Paginator\Paginator;
+use Zend\Paginator\Adapter\DbSelect;
+use Blog\Entity\BlogEntity;
+use Blog\Entity\BlogEntityInterface;
+use Blog\Form\BlogFormInterface;
+use Blog\Table\BlogTableInterface;
+
+class BlogService implements 
+    EventManagerAwareInterface, 
+    BlogServiceInterface
+{
+    protected $eventManager = null;
+    protected $table = null;
+    protected $forms = array();
+    protected $message = null;
+    
+    public function __construct(BlogTableInterface $table)
+    {
+        $this->setTable($table);
+    }
+    
+    public function setEventManager(EventManagerInterface $eventManager)
+    {
+        $eventManager->setIdentifiers(array(__CLASS__));
+        $this->eventManager = $eventManager;
+    }
+    
+    public function getEventManager()
+    {
+        return $this->eventManager;
+    }
+    
+    public function getTable()
+    {
+        return $this->table;
+    }
+    
+    public function setTable(BlogTableInterface $table)
+    {
+        $this->table = $table;
+        return $this;
+    }
+    
+    public function getMessage()
+    {
+        return $this->message;
+    }
+    
+    public function clearMessage()
+    {
+        $this->message = null;
+    }
+    
+    public function setMessage($message)
+    {
+        $this->message = $message;
+    }
+    
+    [...]
+}
+</pre>

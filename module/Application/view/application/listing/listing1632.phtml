@@ -1,0 +1,71 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.32 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.32');
+$this->pageTitle('Listing 16.32');
+?>
+<h3>Darstellung der Übersicht durch View-Skript <code>index.phtml</code></h3>
+<pre>
+&lt;?php
+$this->headTitle('Blogbeiträge verwalten');
+$this->pageTitle('Blogbeiträge verwalten');
+?&gt;
+&lt;p class="pull-center"&gt;
+&lt;?php $url = $this-&gt;url('blog-admin/action', array('action' =&gt; 'create')); ?&gt;
+&lt;a href="&lt;?php echo $url; ?&gt;" class="btn"&gt;Blogbeitrag anlegen&lt;/a&gt;
+&lt;/p&gt;
+&lt;table class="table table-striped table-bordered table-hover table-condensed"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Überschrift&lt;/th&gt;
+&lt;th&gt;Datum&lt;/th&gt;
+&lt;th&gt;Anreißer&lt;/th&gt;
+&lt;th width="170"&gt;Optionen&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;?php foreach ($this-&gt;blogList as $blog) : ?&gt;
+&lt;?php
+$urlEdit = $this-&gt;url(
+    'blog-admin/action', array('action' =&gt; 'update', 'id' =&gt; $blog-&gt;getId())
+);
+$urlDelete = $this-&gt;url(
+    'blog-admin/action', array('action' =&gt; 'delete', 'id' =&gt; $blog-&gt;getId())
+);
+?&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;?php echo $blog-&gt;getTitle(); ?&gt;&lt;/td&gt;
+&lt;td&gt;&lt;?php echo $this-&gt;date($blog-&gt;getCdate()); ?&gt;&lt;/td&gt;
+&lt;td&gt;&lt;?php echo $blog-&gt;getTeaser(); ?&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;a href="&lt;?php echo $urlEdit; ?&gt;" class="btn"&gt;Ändern&lt;/a&gt;
+&lt;a href="&lt;?php echo $urlDelete; ?&gt;" class="btn"&gt;Löschen&lt;/a&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;?php
+echo $this-&gt;paginationControl(
+    $this-&gt;blogList, 'Sliding', 'pagination/sliding', 
+    array('route' =&gt; 'blog-admin/page')
+);
+?&gt;
+</pre>

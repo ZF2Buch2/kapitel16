@@ -1,0 +1,33 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 16
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 16.9 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 16.9');
+$this->pageTitle('Listing 16.9');
+?>
+<h3>Datenbankkonfiguration in <code>/config/autoload/local.php</code></h3>
+<pre>
+&lt;?php
+return array(
+    'db' => array(
+        'driver'   => 'Pdo_Sqlite',
+        'database' => LUIGI_ROOT . '/data/db/luigi.sqlite3.db',
+    ),
+);
+</pre>
